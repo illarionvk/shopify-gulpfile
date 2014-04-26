@@ -1,14 +1,14 @@
 var gulp = require('gulp');
 
-var es = require('event-stream');
 var autoprefix = require('gulp-autoprefixer');
 var coffee = require('gulp-coffee');
+var concat = require('gulp-concat');
+var es = require('event-stream');
 var exec = require('child_process').exec;
 var gutil = require('gulp-util');
-var sass = require('gulp-ruby-sass');
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
 var plumber = require('gulp-plumber');
+var rename = require('gulp-rename');
+var sass = require('gulp-ruby-sass');
 
 var source = {
   coffee: '_js/**/*.coffee',
@@ -52,7 +52,6 @@ gulp.task('sass', function() {
     .pipe( concat('css') )
     .pipe( rename("custom.css.liquid") )
     .pipe( gulp.dest(dest.assets) );
-
 });
 
 gulp.task('coffee', function() {
