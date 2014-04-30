@@ -9,12 +9,12 @@ var gutil = require('gulp-util');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 var sass = require('gulp-ruby-sass');
+var order = require('gulp-order');
 
 var source = {
   coffee: '_js/**/*.coffee',
   mainSass: '_sass/master.scss',
-  liquidSass: '_sass/liquid.scss',
-  scssOutput: '_sass/output'
+  liquidSass: '_sass/liquid.scss'
 };
 
 var dest = {
@@ -29,7 +29,7 @@ var watchFiles = {
     'layout/*',
     'snippets/*',
     'templates/*'
-  ],
+  ]
 };
 
 function mainSass() {
@@ -49,8 +49,8 @@ function liquidSass() {
 
 gulp.task('sass', function() {
   return es.merge( liquidSass(), mainSass() )
-    .pipe( concat('css') )
-    .pipe( rename("custom.css.liquid") )
+    .pipe( order(['liquid.css', 'master.css']) )
+    .pipe( concat('custom.css.liquid') )
     .pipe( gulp.dest(dest.assets) );
 });
 
