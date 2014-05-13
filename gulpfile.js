@@ -28,7 +28,7 @@ var watchFiles = {
     'config/*',
     'layout/*',
     'snippets/*',
-    'templates/*'
+    'templates/**'
   ]
 };
 
